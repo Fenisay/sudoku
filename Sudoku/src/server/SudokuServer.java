@@ -1,6 +1,7 @@
 package server;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 
 import sudoku.SudokuSolver;
@@ -18,13 +19,19 @@ public class SudokuServer implements Runnable {
 		this.ss = new ServerSocket(port);
 		this.nbClients = 0;
 		this.solver = solver;
+		System.out.println("Server " + InetAddress.getLocalHost().getHostName()
+				+ " launched");
+		System.out.println("Adress "
+				+ InetAddress.getLocalHost().getHostAddress()
+				+ ", listening on port " + port);
 	}
 
 	@Override
 	public void run() {
 		try {
 			while (true) {
-				Thread t = new Thread(new ConnectionManager(this.ss.accept(), this));
+				Thread t = new Thread(new ConnectionManager(this.ss.accept(),
+						this));
 				t.start();
 			}
 		} catch (IOException e) {
@@ -39,19 +46,18 @@ public class SudokuServer implements Runnable {
 			System.err.println("Usage : java SudokuServer port oneProblemFile");
 			return;
 		}
-		
+
 		int port = Integer.parseInt(args[0]);
 		SudokuSolver solver = new SudokuSolver();
 		solver.zero();
 		solver.initFromFile(args[1]);
 		solver.init();
-		for(int i = 0; i < 10; i++){
+		for (int i = 0; i < 10; i++) {
 			if (solver.estSolution(1, 1, i))
 				break;
 		}
-		Thread t;
 		try {
-			t = new Thread(new SudokuServer(port, solver));
+			Thread t = new Thread(new SudokuServer(port, solver));
 			t.start();
 		} catch (IOException e) {
 			e.printStackTrace();
