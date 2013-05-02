@@ -12,6 +12,7 @@ public class SudokuServer implements Runnable {
 	private ServerSocket ss;
 	private int nbClients;
 	private SudokuSolver solver;
+	public static int NB_PLAYERS_MAX = 5;
 
 	public SudokuServer(int port, SudokuSolver solver) throws IOException {
 		this.ss = new ServerSocket(port);

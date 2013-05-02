@@ -7,8 +7,8 @@ import java.io.IOException;
 public class SudokuSolver {
 	// ATTENTION:
 	// les lignes et colonnes 0 ne sont pas utilisées
-	int[][] T = new int[10][10];
-	int[][] TInit = new int[10][10];
+	public int[][] T = new int[10][10];
+	public int[][] TInit = new int[10][10];
 
 	public SudokuSolver() {
 	}
