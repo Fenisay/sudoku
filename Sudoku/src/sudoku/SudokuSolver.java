@@ -24,7 +24,7 @@ public class SudokuSolver {
 	}
 
 	// valeurs non nulles
-	void init() {
+	public void init() {
 		int i, j;
 
 		for (i = 1; i <= 9; i++)
@@ -77,7 +77,7 @@ public class SudokuSolver {
 		return estUniqueDansPetitCarre(x, y, v);
 	}
 
-	boolean estSolution(int x, int y, int v) {
+	public boolean estSolution(int x, int y, int v) {
 		// System.out.println (x + " " + y + " " + v);
 
 		if (!estValide(x, y, v))
@@ -124,7 +124,7 @@ public class SudokuSolver {
 		}
 	}
 
-	void initFromFile(String inputFile) {
+	public void initFromFile(String inputFile) {
 		int i, j;
 
 		try {
